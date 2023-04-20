@@ -1,0 +1,49 @@
+static void EliminarEmpleado()
+    {
+        Console.Write("Ingrese la posición del empleado a eliminar: ");
+        int posicion;
+        while (!int.TryParse(Console.ReadLine(), out posicion) || posicion < 0 || posicion >= cantidadDeEmpleados)
+        {
+            Console.WriteLine("Posición inválida. Ingrese una posición válida:");
+        }
+
+        Console.WriteLine("\nEmpleado a eliminar:");
+        Console.WriteLine($"Nombre: {empleados[posicion][0]}");
+        Console.WriteLine($"Apellido: {empleados[posicion][1]}");
+        Console.WriteLine($"Edad: {empleados[posicion][2]}");
+        Console.WriteLine($"Sexo: {empleados[posicion][3]}");
+        Console.WriteLine($"Fecha de nacimiento: {empleados[posicion][4]}");
+        Console.WriteLine($"Posee licencia: {empleados[posicion][5]}");
+        Console.WriteLine($"Sueldo bruto: {empleados[posicion][6]}");
+        Console.WriteLine($"TSS: {empleados[posicion][7]}");
+        Console.WriteLine($"Impuesto sobre la renta: {empleados[posicion][8]}");
+        Console.WriteLine($"Sueldo neto: {empleados[posicion][9]}");
+
+        Console.Write("\n¿Está seguro de que desea eliminar este empleado? (S/N): ");
+        string respuesta;
+        do
+        {
+            respuesta = Console.ReadLine().ToUpper();
+        }
+        while (respuesta != "S" && respuesta != "N");
+
+        if (respuesta == "S")
+        {
+            for (int i = posicion; i < cantidadDeEmpleados - 1; i++)
+            {
+                empleados[i] = empleados[i + 1];
+            }
+
+            empleados[cantidadDeEmpleados - 1] = null;
+            cantidadDeEmpleados--;
+
+            Console.WriteLine("\nEmpleado eliminado con éxito.");
+        }
+        else
+        {
+            Console.WriteLine("\nEmpleado no eliminado.");
+        }
+
+        Console.WriteLine("\nPresione cualquier tecla para volver al menú.");
+        Console.ReadKey();
+        Console.Clear();
